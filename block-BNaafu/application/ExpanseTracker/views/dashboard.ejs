@@ -2,56 +2,150 @@
 <!-- Main -->
 <div class="dashboard container flex justify-between align-start">
   <aside class="flex-24">
-    <div
-      style="border-top: 2px solid rgb(11, 11, 41)"
-      class="flex justify-between align-center"
-    >
-      <i class="far fa-arrow-alt-circle-left"></i
-      ><i class="far fa-arrow-alt-circle-right"></i>
+    <div>
+      <h2>Filter By Month</h2>
+      <form action="">
+        <label for="year"> Year: </label>
+        <select name="year" id="year">
+          <option value="">2021</option>
+          <option value="">2020</option>
+          <option value="">2019</option>
+          <option value="">2018</option>
+          <option value="">2017</option>
+          <option value="">2016</option>
+        </select>
+        <label for="month"> Month: </label>
+        <select name="month" id="month">
+          <option value="">All</option>
+          <option value="">January</option>
+          <option value="">February</option>
+          <option value="">March</option>
+          <option value="">April</option>
+          <option value="">May</option>
+          <option value="">June</option>
+          <option value="">July</option>
+          <option value="">August</option>
+          <option value="">September</option>
+          <option value="">October</option>
+          <option value="">Nobember</option>
+          <option value="">December</option>
+        </select>
+        <input class="btn btn-secondary" type="submit" id="Find" value="Find" />
+      </form>
     </div>
     <div>
       <h2>Filter By Date</h2>
       <form action="">
+        <label for="startDate"> Start Date: </label>
         <input type="Date" />
+        <label for="endDate"> End Date: </label>
         <input type="Date" />
-        <input type="Submit" value="Find" />
+        <input class="btn btn-secondary" type="Submit" value="Find" />
       </form>
     </div>
     <div>
       <h2>Filter By Income Category</h2>
       <form action="">
-        <select name="" id="">
+        <label for="incomeCategory">Income Category: </label>
+        <select name="" id="incomeCategory">
           <option value="select">Select Option 1</option>
           <option value="select">Select Option 2</option>
         </select>
-        <input type="Submit" value="Find" />
+        <input class="btn btn-secondary" type="Submit" value="Find" />
       </form>
     </div>
     <div>
-      <h2>Filter By Expanse Category</h2>
+      <h2>Filter By Expense Category</h2>
       <form action="">
-        <select name="" id="">
+        <label for="expanseCategory"> Expense Category: </label>
+        <select name="" id="expanseCategory">
           <option value="select">Select Option 1</option>
           <option value="select">Select Option 2</option>
         </select>
-        <input type="Submit" value="Find" />
+        <input class="btn btn-secondary" type="Submit" value="Find" />
       </form>
     </div>
-    <div>
-      <h2>Filter By Date And Category</h2>
+    <div style="margin-bottom: 1rem">
+      <h2>Filter By Date And Categories</h2>
       <form action="">
-        <input type="Date" />
-        <input type="Date" />
-        <select name="" id="">
+        <label for="initialDate">Start Date: </label>
+        <input type="Date" id="initialDate" />
+        <label for="finalDate">End Date: </label>
+        <input type="Date" id="finalDate" />
+        <label for="incCategory">Income Category: </label>
+        <select name="" id="incCategory">
           <option value="select">Select Option 1</option>
           <option value="select">Select Option 2</option>
         </select>
-        <input type="Submit" value="Find" />
+        <label for="expCategory">Expanse Category: </label>
+        <select name="" id="expCategory">
+          <option value="select">Select Option 1</option>
+          <option value="select">Select Option 2</option>
+        </select>
+        <input class="btn btn-secondary" type="Submit" value="Find" />
       </form>
     </div>
   </aside>
 
-  <main class="flex-75"></main>
+  <main class="flex-75">
+    <div style="border: none" class="flex justify-between align-center">
+      <i class="far fa-arrow-alt-circle-left"></i
+      ><i class="far fa-arrow-alt-circle-right"></i>
+    </div>
+
+    <section class="budget">
+      <h2
+        style="
+          text-align: center;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: rgb(11, 11, 41);
+        "
+      >
+        <span>September</span>~<span>2020</span>
+      </h2>
+      <div style="color: red" class="flex justify-between align-center">
+        <p class="flex-20">Expense</p>
+        <p class="flex-20">Health</p>
+        <p class="flex-20">₹ 100000</p>
+        <p>20-20-2020</p>
+        <p>
+          <a style="color: rgb(11, 11, 41); font-size: 0.9rem" href=""
+            ><i class="far fa-edit"></i
+          ></a>
+          <a style="color: rgb(11, 11, 41); font-size: 0.9rem" href=""
+            ><i class="far fa-trash-alt"></i
+          ></a>
+        </p>
+      </div>
+      <div style="color: green" class="flex justify-between align-center">
+        <p class="flex-20">Income</p>
+        <p class="flex-20">Salary</p>
+        <p class="flex-20">₹ 100000</p>
+        <p>20-20-2020</p>
+        <p>
+          <a style="color: rgb(11, 11, 41); font-size: 0.9rem" href=""
+            ><i class="far fa-edit"></i
+          ></a>
+          <a style="color: rgb(11, 11, 41); font-size: 0.9rem" href=""
+            ><i class="far fa-trash-alt"></i
+          ></a>
+        </p>
+      </div>
+    </section>
+
+    <div class="flex justify-center align-center add">
+      <i class="fas fa-plus"></i>
+    </div>
+    <div class="flex justify-center align-center flex-column add-New">
+      <a href="/income/new"
+        ><button class="btn btn-secondary">Add Income</button></a
+      >
+      <a href="/expense/new"
+        ><button class="btn btn-secondary">Add Expense</button></a
+      >
+    </div>
+  </main>
 </div>
 
 <% include partials/footer %>

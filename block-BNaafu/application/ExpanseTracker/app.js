@@ -17,6 +17,8 @@ require('./modules/passport');
 // Requiring The Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var incomeRouter = require('./routes/income');
+var expenseRouter = require('./routes/expense');
 var auth = require('./middlewares/auth');
 
 // Connecting To Database
@@ -75,6 +77,8 @@ app.use(auth.userInfo);
 // Using The Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/income', incomeRouter);
+app.use('/expense', expenseRouter);
 
 //  Catch 404 And Frward To Error Handler
 app.use(function (req, res, next) {
