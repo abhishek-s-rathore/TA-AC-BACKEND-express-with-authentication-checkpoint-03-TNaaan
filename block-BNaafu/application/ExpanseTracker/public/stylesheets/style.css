@@ -222,6 +222,12 @@ table {
       flex-wrap: wrap;
 }
 
+.flex-18 {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 18%;
+          flex: 0 1 18%;
+}
+
 .flex-20 {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 20%;
@@ -520,16 +526,29 @@ h6 {
 .dashboard aside {
   height: 100vh;
   border-right: 2px solid #0b0b29;
-  padding-top: 6rem;
+  padding-top: 5rem;
+  overflow: auto;
+}
+
+.dashboard aside::-webkit-scrollbar {
+  display: none;
 }
 
 .dashboard form input {
   width: 100%;
+  height: 1.7rem;
+  border: 1px solid #0b0b29;
+  border-radius: 0.15rem;
+  margin-bottom: 0.25rem;
 }
 
 .dashboard form select {
   width: 100%;
-  height: 1.25rem;
+  height: 1.7rem;
+  border: 1px solid #0b0b29;
+  margin-bottom: 0.25rem;
+  border-radius: 0.15rem;
+  background-color: white;
 }
 
 .dashboard div {
@@ -540,6 +559,102 @@ h6 {
 
 .dashboard h2 {
   text-align: center;
+  font-style: italic;
+  color: tomato;
   font-size: 1.5rem;
+}
+
+.dashboard main {
+  padding-top: 5rem;
+}
+
+.dashboard main .filters {
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #0b0b29;
+}
+
+.dashboard main .filters form {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dashboard main .filters input {
+  height: 1.5rem;
+  margin: 0.25rem;
+}
+
+.dashboard main .filters select {
+  border: 1px solid #0b0b29;
+  height: 1.5rem;
+  margin: 0.25rem;
+  border-radius: 0.2rem;
+}
+
+.dashboard main .filters label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0b0b29;
+  height: 1.5rem;
+  margin: 0.25rem;
+}
+
+.dashboard main section div {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #0b0b29;
+  padding: 0.25rem;
+}
+
+.dashboard main .budget {
+  height: 74vh;
+  overflow: auto;
+}
+
+.dashboard main .budget::-webkit-scrollbar {
+  display: hidden;
+}
+
+.dashboard main .add {
+  width: 3.2rem;
+  height: 3.2rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  position: absolute;
+  background-color: #0b0b29;
+  color: white;
+  border-radius: 50%;
+  right: 2rem;
+  bottom: 2rem;
+}
+
+.dashboard main .add:hover ~ .add-New {
+  display: inline-block;
+}
+
+.dashboard main .add-New {
+  position: absolute;
+  border: 1px solid #0b0b29;
+  border-radius: 0.5rem;
+  right: 5.3rem;
+  bottom: 1.6rem;
+  padding: 1rem;
+  display: none;
+}
+
+.dashboard main .add-New button {
+  width: 7rem;
+}
+
+.dashboard main .add-New:hover {
+  display: block;
 }
 /*# sourceMappingURL=style.css.map */

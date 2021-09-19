@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
 
 // Dashboard
 router.get('/dashboard', (req, res, next) => {
-  res.render('editExpanse');
+  res.render('dashboard');
 });
 
 router.get('/signup', (req, res, next) => {
