@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const incomeSchema = new Schema(
+const expenseSchema = new Schema(
   {
-    source: { type: String, required: true },
-    incomeAmount: { type: Number, default: 0, required: true },
+    expense: { type: String, required: true },
+    expenseAmount: { type: Number, default: 0, required: true },
     date: { type: Date, required: true },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -15,4 +15,4 @@ const incomeSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Income', incomeSchema);
+module.exports = mongoose.model('Expense', expenseSchema);

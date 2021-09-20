@@ -23,7 +23,7 @@ var auth = require('./middlewares/auth');
 
 // Connecting To Database
 mongoose.connect(
-  'mongodb://localhost/ExpanseTracker',
+  'mongodb://localhost/ExpenseTracker',
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     console.log('Connected To Database: ', err ? false : true);
@@ -59,7 +59,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: 'mongodb://localhost/ExpanseTracker',
+      mongoUrl: 'mongodb://localhost/ExpenseTracker',
     }),
   })
 );
@@ -73,7 +73,6 @@ app.use(flash());
 
 // Using The Logged In User Information
 app.use(auth.userInfo);
-
 // Using The Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

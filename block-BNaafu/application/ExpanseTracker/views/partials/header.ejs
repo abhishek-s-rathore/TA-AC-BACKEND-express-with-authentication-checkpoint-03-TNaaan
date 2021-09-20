@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--Title-->
-    <title>Expanse-Tracker</title>
+    <title>Expense-Tracker</title>
     <!--Stylesheet-->
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <!--Google Fonts-->
@@ -34,17 +34,22 @@
         /></a>
         <nav>
           <ul class="flex justify-between align-center">
-            <% if(null){ %>
+            <% if(user){ %>
             <li>
-              <a class="user" href="">Abhishek Singh Rathore</a>
+              <% if(user.providers.includes('local')){ %>
+              <a class="user" href=""> <%= user.localUser.name %></a>
+              <% }else if(user.providers.includes('google')){ %>
+              <a class="user" href=""> <%= user.googleUser.name %></a>
+              <% } else if (user.providers.includes('github')){ %>
+              <a class="user" href=""> <%= user.githubUser.name %></a>
+              <% } %>
             </li>
             <li>
               <a href="/users/signout"
                 ><button class="btn btn-primary">Sign Out</button></a
               >
             </li>
-            <% } %>
-
+            <% }else{ %>
             <li>
               <a href="/users/signin"
                 ><button class="btn btn-primary">Sign In</button></a
@@ -55,6 +60,7 @@
                 ><button class="btn btn-primary">Sign Up</button></a
               >
             </li>
+            <% } %>
           </ul>
         </nav>
       </div>

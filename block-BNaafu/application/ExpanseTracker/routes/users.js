@@ -1,15 +1,50 @@
 var express = require('express');
 var User = require('../models/User');
+const Budget = require('../models/Budget');
 var passport = require('passport');
 var router = express.Router();
+var auth = require('../middlewares/auth');
+var moment = require('moment');
+var mongoose = require('mongoose');
 
 router.get('/', (req, res, next) => {
   res.send('respond with a resource');
 });
 
 // Dashboard
-router.get('/dashboard', (req, res, next) => {
-  res.render('dashboard');
+router.get('/dashboard', auth.loggedInUser, (req, res, next) => {
+  var currMonth = moment().month();
+  var currYear = moment().year();
+  console.log(currYear);
+  Budget.aggregate(
+    [
+      { $match: { userId: mongoose.Types.ObjectId(req.user.id) } },
+      {
+        $project: {
+          budget: '$budget',
+          source: '$source',
+          expense: '$expense',
+          incomeAmount: '$incomeAmount',
+          expenseAmount: '$expenseAmount',
+          date: '$date',
+          userId: 'userId',
+          month: { $month: '$date' },
+          year: { $year: '$date' },
+        },
+      },
+      { $match: { month: currMonth + 1 } },
+      { $match: { year: currYear } },
+      { $sort: { date: 1 } },
+    ],
+    (err, budgets) => {
+      res.render('dashboard', { budgets, moment });
+    }
+  );
+
+  // Budget.find({}, (err, budgets) => {
+  //   if (err) return next(err);
+  //   res.render('dashboard', { budgets, moment });
+  // });
 });
 
 router.get('/signup', (req, res, next) => {
@@ -19,11 +54,11 @@ router.get('/signup', (req, res, next) => {
 
 router.post('/signup', function (req, res, next) {
   var data = req.body;
-  console.log(data);
+  // console.log(data);
   var email = data.email;
   var local = {
     email: email,
-    providers: ['Local'],
+    providers: ['local'],
     localUser: {
       name: data.name,
       phone: data.phone,
@@ -54,7 +89,8 @@ router.get('/signin', (req, res, next) => {
 });
 
 router.post('/signin', function (req, res, next) {
-  const { email, password } = req.body;
+  const email = req.body.email;
+  const password = req.body.password;
   if (!email || !password) {
     req.flash('error', 'Email or Password is missing..');
     return res.redirect('/users/signin');
