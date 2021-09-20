@@ -12,9 +12,8 @@ passport.use(
       callbackURL: '/users/auth/github/callback',
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
+      // console.log(profile);
       var email = profile._json.email;
-
       var github = {
         email: email,
         providers: [profile.provider],
@@ -25,8 +24,8 @@ passport.use(
         },
       };
       User.findOne({ email: profile._json.email }, (err, user) => {
-        if (err) return done(err);
         // console.log(err, user);
+        if (err) return done(err);
         if (!user) {
           User.create(github, (err, addedUser) => {
             if (err) return done(err);
@@ -49,9 +48,8 @@ passport.use(
       callbackURL: '/users/auth/google/callback',
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
+      // console.log(profile);
       var email = profile._json.email;
-
       var google = {
         email: email,
         providers: [profile.provider],
@@ -63,8 +61,8 @@ passport.use(
       };
 
       User.findOne({ email }, (err, user) => {
-        if (err) return done(err);
         // console.log(err, user);
+        if (err) return done(err);
         if (!user) {
           User.create(google, (err, addedUser) => {
             if (err) return done(err, false);
