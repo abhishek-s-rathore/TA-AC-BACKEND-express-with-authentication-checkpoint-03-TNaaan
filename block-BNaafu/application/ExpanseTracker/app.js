@@ -17,6 +17,7 @@ require('./modules/passport');
 // Requiring The Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var dashboard = require('./routes/dashboard');
 var incomeRouter = require('./routes/income');
 var expenseRouter = require('./routes/expense');
 var auth = require('./middlewares/auth');
@@ -76,6 +77,7 @@ app.use(auth.userInfo);
 // Using The Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/dashboard', dashboard);
 app.use('/income', incomeRouter);
 app.use('/expense', expenseRouter);
 

@@ -4,83 +4,88 @@
   <aside class="flex-24">
     <div>
       <h2>Filter By Month</h2>
-      <form action="">
+      <form action="/dashboard/filter/byMonth" method="POST">
         <label for="year"> Year: </label>
         <select name="year" id="year">
-          <option value="">2021</option>
-          <option value="">2020</option>
-          <option value="">2019</option>
-          <option value="">2018</option>
-          <option value="">2017</option>
-          <option value="">2016</option>
+          <% yearArr.forEach(year=>{ %>
+          <option value="<%= year %>"><%= year %></option>
+          <% }) %>
         </select>
         <label for="month"> Month: </label>
         <select name="month" id="month">
-          <option value="">All</option>
-          <option value="">January</option>
-          <option value="">February</option>
-          <option value="">March</option>
-          <option value="">April</option>
-          <option value="">May</option>
-          <option value="">June</option>
-          <option value="">July</option>
-          <option value="">August</option>
-          <option value="">September</option>
-          <option value="">October</option>
-          <option value="">Nobember</option>
-          <option value="">December</option>
+          <option value="All">All</option>
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
         </select>
         <input class="btn btn-secondary" type="submit" id="Find" value="Find" />
       </form>
     </div>
     <div>
       <h2>Filter By Date</h2>
-      <form action="">
+      <form action="/dashboard/filter/byDate" method="POST">
         <label for="startDate"> Start Date: </label>
-        <input type="Date" />
+        <input name="startDate" id="startDate" type="Date" />
         <label for="endDate"> End Date: </label>
-        <input type="Date" />
+        <input name="endDate" id="endDate" type="Date" />
         <input class="btn btn-secondary" type="Submit" value="Find" />
       </form>
     </div>
     <div>
-      <h2>Filter By Income Category</h2>
-      <form action="">
-        <label for="incomeCategory">Income Category: </label>
-        <select name="" id="incomeCategory">
-          <option value="select">Select Option 1</option>
-          <option value="select">Select Option 2</option>
+      <h2>Filter By Income Type</h2>
+      <form action="/dashboard/filter/byIncomeType" method="POST">
+        <label for="incomeType">Income Type: </label>
+        <select name="incomeType" id="incomeType">
+          <option value="All">All</option>
+          <% incomeTypes.forEach(income=>{ %>
+          <option value="<%= income %>"><%= income %></option>
+          <% }) %>
         </select>
         <input class="btn btn-secondary" type="Submit" value="Find" />
       </form>
     </div>
     <div>
-      <h2>Filter By Expense Category</h2>
-      <form action="">
-        <label for="expanseCategory"> Expense Category: </label>
-        <select name="" id="expanseCategory">
-          <option value="select">Select Option 1</option>
-          <option value="select">Select Option 2</option>
+      <h2>Filter By Expense Type</h2>
+      <form action="/dashboard/filter/byExpenseType" method="POST">
+        <label for="expenseType"> Expense Type: </label>
+        <select name="expenseType" id="expanseType">
+          <option value="">All</option>
+          <% expenseTypes.forEach(expense=>{ %>
+          <option value="<%= expense %>"><%= expense %></option>
+          <% }) %>
         </select>
         <input class="btn btn-secondary" type="Submit" value="Find" />
       </form>
     </div>
     <div style="margin-bottom: 1rem">
       <h2>Filter By Date And Categories</h2>
-      <form action="">
+      <form action="/dashboard/filter/mixed" , method="POST">
         <label for="initialDate">Start Date: </label>
-        <input type="Date" id="initialDate" />
+        <input name="startDate" type="Date" id="initialDate" />
         <label for="finalDate">End Date: </label>
-        <input type="Date" id="finalDate" />
+        <input name="endDate" type="Date" id="finalDate" />
         <label for="incCategory">Income Category: </label>
-        <select name="" id="incCategory">
-          <option value="select">Select Option 1</option>
-          <option value="select">Select Option 2</option>
+        <select name="incomeType" id="incCategory">
+          <option value="All">All</option>
+          <% incomeTypes.forEach(income=>{ %>
+          <option value="<%= income %>"><%= income %></option>
+          <% }) %>
         </select>
         <label for="expCategory">Expanse Category: </label>
-        <select name="" id="expCategory">
-          <option value="select">Select Option 1</option>
-          <option value="select">Select Option 2</option>
+        <select name="expenseType" id="expCategory">
+          <option value="All">All</option>
+          <% expenseTypes.forEach(expense=>{ %>
+          <option value="<%= expense %>"><%= expense %></option>
+          <% }) %>
         </select>
         <input class="btn btn-secondary" type="Submit" value="Find" />
       </form>
@@ -102,12 +107,10 @@
           color: rgb(11, 11, 41);
         "
       >
-        <span><%= moment().format('MMMM') %></span>~<span
-          ><%= moment().format('YYYY') %></span
-        >
+        <span><%= ipOne %></span>~<span><%= ipTwo %></span>
       </h2>
-      <% if(budgets.length){budgets.reverse().forEach(budget=>{ %>
-      <!-- jsdfk -->
+      <% if(budgetData.length){budgetData.forEach(budget=>{ %>
+      <!-- Line Break -->
       <% if(budget.budget ==='Income'){ %>
       <div style="color: green" class="flex justify-between align-center">
         <p class="flex-20">Income</p>
