@@ -1,6 +1,8 @@
 var express = require('express');
 var User = require('../models/User');
-const Budget = require('../models/Budget');
+
+const Expense = require('../models/Expense');
+const Income = require('../models/Income');
 var passport = require('passport');
 var router = express.Router();
 var auth = require('../middlewares/auth');
@@ -9,42 +11,6 @@ var mongoose = require('mongoose');
 
 router.get('/', (req, res, next) => {
   res.send('respond with a resource');
-});
-
-// Dashboard
-router.get('/dashboard', auth.loggedInUser, (req, res, next) => {
-  var currMonth = moment().month();
-  var currYear = moment().year();
-  console.log(currYear);
-  Budget.aggregate(
-    [
-      { $match: { userId: mongoose.Types.ObjectId(req.user.id) } },
-      {
-        $project: {
-          budget: '$budget',
-          source: '$source',
-          expense: '$expense',
-          incomeAmount: '$incomeAmount',
-          expenseAmount: '$expenseAmount',
-          date: '$date',
-          userId: 'userId',
-          month: { $month: '$date' },
-          year: { $year: '$date' },
-        },
-      },
-      { $match: { month: currMonth + 1 } },
-      { $match: { year: currYear } },
-      { $sort: { date: 1 } },
-    ],
-    (err, budgets) => {
-      res.render('dashboard', { budgets, moment });
-    }
-  );
-
-  // Budget.find({}, (err, budgets) => {
-  //   if (err) return next(err);
-  //   res.render('dashboard', { budgets, moment });
-  // });
 });
 
 router.get('/signup', (req, res, next) => {
@@ -110,7 +76,7 @@ router.post('/signin', function (req, res, next) {
       }
       // Persist Logged In User Information
       req.session.userId = user.id;
-      res.redirect('/users/dashboard');
+      res.redirect('/dashboard');
     });
   });
 });
@@ -122,7 +88,7 @@ router.get(
   '/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/users/signup' }),
   (req, res) => {
-    res.redirect('/users/dashboard');
+    res.redirect('/dashboard');
   }
 );
 
@@ -136,7 +102,7 @@ router.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/users/signup' }),
   (req, res) => {
-    res.redirect('/users/dashboard');
+    res.redirect('/dashboard');
   }
 );
 
